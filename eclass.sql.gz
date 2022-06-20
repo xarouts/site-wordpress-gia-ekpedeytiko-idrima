@@ -1,0 +1,2253 @@
+-- phpMyAdmin SQL Dump
+-- version 5.1.1
+-- https://www.phpmyadmin.net/
+--
+-- Εξυπηρετητής: 127.0.0.1
+-- Χρόνος δημιουργίας: 20 Ιουν 2022 στις 21:39:10
+-- Έκδοση διακομιστή: 10.4.21-MariaDB
+-- Έκδοση PHP: 7.3.31
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Βάση δεδομένων: `eclass`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Δομή πίνακα για τον πίνακα `abuse_report`
+--
+
+CREATE TABLE `abuse_report` (
+  `id` int(11) NOT NULL,
+  `rid` int(11) NOT NULL,
+  `rtype` varchar(50) NOT NULL,
+  `course_id` int(11) NOT NULL,
+  `reason` varchar(50) NOT NULL DEFAULT '',
+  `message` text NOT NULL,
+  `timestamp` int(11) NOT NULL DEFAULT 0,
+  `user_id` int(11) UNSIGNED NOT NULL DEFAULT 0,
+  `status` tinyint(1) NOT NULL DEFAULT 1
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Δομή πίνακα για τον πίνακα `actions_daily`
+--
+
+CREATE TABLE `actions_daily` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `module_id` int(11) NOT NULL,
+  `course_id` int(11) NOT NULL,
+  `hits` int(11) NOT NULL,
+  `duration` int(11) NOT NULL,
+  `day` date NOT NULL,
+  `last_update` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Άδειασμα δεδομένων του πίνακα `actions_daily`
+--
+
+INSERT INTO `actions_daily` (`id`, `user_id`, `module_id`, `course_id`, `hits`, `duration`, `day`, `last_update`) VALUES
+(1, 2, 27, 1, 1, 18, '2021-09-21', '2021-09-21 23:29:17'),
+(2, 2, 3, 1, 4, 255, '2021-09-21', '2021-09-21 23:33:33'),
+(3, 2, 10, 1, 3, 60, '2021-09-21', '2021-09-21 23:37:10'),
+(4, 2, 5, 1, 10, 1146, '2021-09-21', '2021-09-21 23:38:59'),
+(5, 2, 27, 2, 1, 14, '2021-09-21', '2021-09-21 23:40:42'),
+(6, 2, 10, 2, 2, 116, '2021-09-21', '2021-09-21 23:42:43'),
+(7, 2, 5, 2, 4, 972, '2021-09-21', '2021-09-21 23:44:04'),
+(8, 4, 27, 1, 2, 14, '2021-09-21', '2021-09-21 23:49:08'),
+(9, 4, 3, 1, 3, 954, '2021-09-21', '2021-09-21 23:49:18'),
+(10, 4, 27, 2, 2, 1240, '2021-09-21', '2021-09-21 23:54:23'),
+(11, 4, 7, 1, 2, 4, '2021-09-21', '2021-09-21 23:49:13'),
+(12, 4, 2, 1, 1, 2, '2021-09-21', '2021-09-21 23:49:16'),
+(13, 1, 27, 1, 7, 1038, '2021-09-21', '2021-09-21 23:54:02'),
+(14, 1, 5, 1, 1, 96, '2021-09-21', '2021-09-21 23:50:30'),
+(15, 1, 27, 2, 3, 131, '2021-09-21', '2021-09-21 23:53:08'),
+(16, 1, 3, 2, 1, 900, '2021-09-21', '2021-09-21 23:53:11'),
+(17, 2, 27, 1, 6, 661, '2021-09-22', '2021-09-22 14:36:13'),
+(18, 2, 5, 1, 27, 1326, '2021-09-22', '2021-09-22 14:37:16'),
+(19, 2, 7, 1, 1, 1, '2021-09-22', '2021-09-22 14:20:46'),
+(20, 2, 10, 1, 2, 26, '2021-09-22', '2021-09-22 14:36:18'),
+(21, 2, 27, 2, 3, 15, '2021-09-22', '2021-09-22 14:37:26'),
+(22, 2, 5, 2, 21, 1253, '2021-09-22', '2021-09-22 14:38:59'),
+(23, 4, 27, 2, 2, 561, '2021-09-22', '2021-09-22 14:38:04'),
+(24, 4, 27, 1, 3, 17, '2021-09-22', '2021-09-22 14:32:44'),
+(25, 4, 10, 1, 1, 195, '2021-09-22', '2021-09-22 14:28:57'),
+(26, 2, 10, 2, 5, 398, '2021-09-22', '2021-09-22 14:31:09'),
+(27, 4, 5, 1, 8, 937, '2021-09-22', '2021-09-22 14:33:05'),
+(28, 3, 27, 1, 1, 6, '2021-09-22', '2021-09-22 14:35:21'),
+(29, 3, 5, 1, 5, 918, '2021-09-22', '2021-09-22 14:35:45'),
+(30, 4, 5, 2, 4, 913, '2021-09-22', '2021-09-22 14:38:21'),
+(31, 1, 27, 2, 1, 900, '2021-10-11', '2021-10-11 17:52:22'),
+(32, 1, 27, 1, 1, 5, '2022-06-20', '2022-06-20 22:33:16'),
+(33, 1, 7, 1, 2, 2, '2022-06-20', '2022-06-20 22:33:21'),
+(34, 1, 10, 1, 1, 3, '2022-06-20', '2022-06-20 22:33:23'),
+(35, 1, 17, 1, 1, 7, '2022-06-20', '2022-06-20 22:33:26'),
+(36, 1, 15, 1, 1, 900, '2022-06-20', '2022-06-20 22:33:33');
+
+-- --------------------------------------------------------
+
+--
+-- Δομή πίνακα για τον πίνακα `actions_summary`
+--
+
+CREATE TABLE `actions_summary` (
+  `id` int(11) NOT NULL,
+  `module_id` int(11) NOT NULL,
+  `visits` int(11) NOT NULL,
+  `start_date` datetime NOT NULL,
+  `end_date` datetime NOT NULL,
+  `duration` int(11) NOT NULL,
+  `course_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Δομή πίνακα για τον πίνακα `activity_content`
+--
+
+CREATE TABLE `activity_content` (
+  `id` int(11) NOT NULL,
+  `course_id` int(11) NOT NULL,
+  `heading_id` int(11) NOT NULL DEFAULT 0,
+  `content` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Δομή πίνακα για τον πίνακα `activity_heading`
+--
+
+CREATE TABLE `activity_heading` (
+  `id` int(11) NOT NULL,
+  `order` int(11) NOT NULL DEFAULT 0,
+  `heading` text NOT NULL,
+  `required` tinyint(1) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Δομή πίνακα για τον πίνακα `admin`
+--
+
+CREATE TABLE `admin` (
+  `user_id` int(11) NOT NULL,
+  `privilege` int(11) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Άδειασμα δεδομένων του πίνακα `admin`
+--
+
+INSERT INTO `admin` (`user_id`, `privilege`) VALUES
+(1, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Δομή πίνακα για τον πίνακα `admin_announcement`
+--
+
+CREATE TABLE `admin_announcement` (
+  `id` int(11) NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `body` text DEFAULT NULL,
+  `date` datetime NOT NULL,
+  `begin` datetime DEFAULT NULL,
+  `end` datetime DEFAULT NULL,
+  `lang` varchar(16) NOT NULL DEFAULT 'el',
+  `order` mediumint(11) NOT NULL DEFAULT 0,
+  `visible` tinyint(4) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Δομή πίνακα για τον πίνακα `admin_calendar`
+--
+
+CREATE TABLE `admin_calendar` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `title` varchar(200) NOT NULL,
+  `content` text NOT NULL,
+  `start` datetime NOT NULL,
+  `duration` time NOT NULL,
+  `recursion_period` varchar(30) DEFAULT NULL,
+  `recursion_end` date DEFAULT NULL,
+  `source_event_id` int(11) DEFAULT NULL,
+  `visibility_level` int(11) DEFAULT 1,
+  `email_notification` time DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Δομή πίνακα για τον πίνακα `agenda`
+--
+
+CREATE TABLE `agenda` (
+  `id` int(11) NOT NULL,
+  `course_id` int(11) NOT NULL,
+  `title` varchar(200) NOT NULL,
+  `content` text NOT NULL,
+  `start` datetime NOT NULL,
+  `duration` varchar(20) NOT NULL,
+  `visible` tinyint(4) DEFAULT NULL,
+  `recursion_period` varchar(30) DEFAULT NULL,
+  `recursion_end` date DEFAULT NULL,
+  `source_event_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Δομή πίνακα για τον πίνακα `analytics`
+--
+
+CREATE TABLE `analytics` (
+  `id` int(11) NOT NULL,
+  `courseID` int(11) NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `description` text DEFAULT NULL,
+  `active` tinyint(1) NOT NULL DEFAULT 0,
+  `start_date` date DEFAULT NULL,
+  `end_date` date DEFAULT NULL,
+  `created` datetime DEFAULT NULL,
+  `periodType` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Δομή πίνακα για τον πίνακα `analytics_element`
+--
+
+CREATE TABLE `analytics_element` (
+  `id` int(11) NOT NULL,
+  `analytics_id` int(11) NOT NULL,
+  `module_id` int(11) NOT NULL,
+  `resource` int(11) DEFAULT NULL,
+  `upper_threshold` float DEFAULT NULL,
+  `lower_threshold` float DEFAULT NULL,
+  `weight` int(11) NOT NULL DEFAULT 1,
+  `min_value` float NOT NULL,
+  `max_value` float NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Δομή πίνακα για τον πίνακα `announcement`
+--
+
+CREATE TABLE `announcement` (
+  `id` int(11) NOT NULL,
+  `title` varchar(255) NOT NULL DEFAULT '',
+  `content` text DEFAULT NULL,
+  `date` datetime NOT NULL,
+  `course_id` int(11) NOT NULL DEFAULT 0,
+  `order` mediumint(11) NOT NULL DEFAULT 0,
+  `visible` tinyint(4) NOT NULL DEFAULT 0,
+  `start_display` datetime DEFAULT NULL,
+  `stop_display` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Δομή πίνακα για τον πίνακα `assignment`
+--
+
+CREATE TABLE `assignment` (
+  `id` int(11) NOT NULL,
+  `course_id` int(11) NOT NULL,
+  `title` varchar(200) NOT NULL DEFAULT '',
+  `description` text NOT NULL,
+  `comments` text NOT NULL,
+  `submission_type` tinyint(4) NOT NULL DEFAULT 0,
+  `deadline` datetime DEFAULT NULL,
+  `late_submission` tinyint(4) NOT NULL DEFAULT 0,
+  `submission_date` datetime NOT NULL,
+  `active` char(1) NOT NULL DEFAULT '1',
+  `secret_directory` varchar(30) NOT NULL,
+  `group_submissions` char(1) NOT NULL DEFAULT '0',
+  `grading_type` tinyint(4) NOT NULL DEFAULT 0,
+  `max_grade` float NOT NULL DEFAULT 10,
+  `grading_scale_id` int(11) NOT NULL DEFAULT 0,
+  `assign_to_specific` char(1) NOT NULL DEFAULT '0',
+  `file_path` varchar(200) NOT NULL DEFAULT '',
+  `file_name` varchar(200) NOT NULL DEFAULT '',
+  `auto_judge` tinyint(1) NOT NULL DEFAULT 0,
+  `auto_judge_scenarios` text DEFAULT NULL,
+  `lang` varchar(10) NOT NULL DEFAULT '',
+  `notification` tinyint(4) DEFAULT 0,
+  `ip_lock` text DEFAULT NULL,
+  `password_lock` varchar(255) NOT NULL DEFAULT '',
+  `assignment_type` tinyint(4) NOT NULL DEFAULT 0,
+  `lti_template` int(11) DEFAULT NULL,
+  `launchcontainer` tinyint(4) DEFAULT NULL,
+  `tii_feedbackreleasedate` datetime DEFAULT NULL,
+  `tii_internetcheck` tinyint(4) NOT NULL DEFAULT 1,
+  `tii_institutioncheck` tinyint(4) NOT NULL DEFAULT 1,
+  `tii_journalcheck` tinyint(4) NOT NULL DEFAULT 1,
+  `tii_report_gen_speed` tinyint(4) NOT NULL DEFAULT 0,
+  `tii_s_view_reports` tinyint(4) NOT NULL DEFAULT 0,
+  `tii_studentpapercheck` tinyint(4) NOT NULL DEFAULT 1,
+  `tii_submit_papers_to` tinyint(4) NOT NULL DEFAULT 1,
+  `tii_use_biblio_exclusion` tinyint(4) NOT NULL DEFAULT 0,
+  `tii_use_quoted_exclusion` tinyint(4) NOT NULL DEFAULT 0,
+  `tii_exclude_type` varchar(20) NOT NULL DEFAULT 'none',
+  `tii_exclude_value` int(11) NOT NULL DEFAULT 0,
+  `reviews_per_assignment` int(4) DEFAULT NULL,
+  `start_date_review` datetime DEFAULT NULL ON UPDATE current_timestamp(),
+  `due_date_review` datetime DEFAULT NULL ON UPDATE current_timestamp(),
+  `max_submissions` tinyint(3) UNSIGNED NOT NULL DEFAULT 1
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Άδειασμα δεδομένων του πίνακα `assignment`
+--
+
+INSERT INTO `assignment` (`id`, `course_id`, `title`, `description`, `comments`, `submission_type`, `deadline`, `late_submission`, `submission_date`, `active`, `secret_directory`, `group_submissions`, `grading_type`, `max_grade`, `grading_scale_id`, `assign_to_specific`, `file_path`, `file_name`, `auto_judge`, `auto_judge_scenarios`, `lang`, `notification`, `ip_lock`, `password_lock`, `assignment_type`, `lti_template`, `launchcontainer`, `tii_feedbackreleasedate`, `tii_internetcheck`, `tii_institutioncheck`, `tii_journalcheck`, `tii_report_gen_speed`, `tii_s_view_reports`, `tii_studentpapercheck`, `tii_submit_papers_to`, `tii_use_biblio_exclusion`, `tii_use_quoted_exclusion`, `tii_exclude_type`, `tii_exclude_value`, `reviews_per_assignment`, `start_date_review`, `due_date_review`, `max_submissions`) VALUES
+(4, 1, 'φριαχτε κομπιουτερακι', '', '', 0, '2021-09-22 16:00:00', 0, '2021-09-22 14:21:00', '0', '614b11c867fd0', '0', 0, 10, 0, '0', '', '', 0, '', '', 0, '', '', 0, NULL, NULL, NULL, 0, 0, 0, 0, 0, 0, 1, 0, 0, 'none', 0, 0, '2021-09-22 14:36:34', '2021-09-22 14:36:34', 2),
+(5, 2, 'Τελικο Διαγονισμα', '<p>φιταξτε ενα προγραμα υπολογισμο μιθον</p>\r\n<p>φιταξτε συστημα κρατησης εισιτιριον</p>', '', 0, '2021-09-22 16:00:00', 0, '2021-09-22 14:27:38', '0', '614b132a83c18', '0', 0, 10, 0, '0', '', '', 0, '', '', 0, '', '', 0, NULL, NULL, NULL, 0, 0, 0, 0, 0, 0, 1, 0, 0, 'none', 0, NULL, '2021-09-22 14:38:58', '2021-09-22 14:38:58', 2);
+
+-- --------------------------------------------------------
+
+--
+-- Δομή πίνακα για τον πίνακα `assignment_grading_review`
+--
+
+CREATE TABLE `assignment_grading_review` (
+  `id` int(11) NOT NULL,
+  `assignment_id` int(11) NOT NULL,
+  `user_submit_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `file_path` varchar(200) NOT NULL,
+  `file_name` varchar(200) NOT NULL,
+  `submission_text` mediumtext DEFAULT NULL,
+  `submission_date` datetime NOT NULL,
+  `gid` int(11) NOT NULL,
+  `users_id` int(11) NOT NULL,
+  `grade` float DEFAULT NULL,
+  `comments` text DEFAULT NULL,
+  `date_submit` datetime DEFAULT NULL,
+  `rubric_scales` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Δομή πίνακα για τον πίνακα `assignment_submit`
+--
+
+CREATE TABLE `assignment_submit` (
+  `id` int(11) NOT NULL,
+  `uid` int(11) UNSIGNED NOT NULL DEFAULT 0,
+  `assignment_id` int(11) NOT NULL DEFAULT 0,
+  `submission_date` datetime NOT NULL,
+  `submission_ip` varchar(45) NOT NULL DEFAULT '',
+  `file_path` varchar(200) NOT NULL DEFAULT '',
+  `file_name` varchar(200) NOT NULL DEFAULT '',
+  `submission_text` mediumtext DEFAULT NULL,
+  `comments` text NOT NULL,
+  `grade` float DEFAULT NULL,
+  `grade_rubric` text DEFAULT NULL,
+  `grade_comments` text NOT NULL,
+  `grade_comments_filepath` varchar(200) NOT NULL DEFAULT '',
+  `grade_comments_filename` varchar(200) NOT NULL DEFAULT '',
+  `grade_submission_date` date NOT NULL DEFAULT '1000-10-10',
+  `grade_submission_ip` varchar(45) NOT NULL DEFAULT '',
+  `group_id` int(11) DEFAULT NULL,
+  `auto_judge_scenarios_output` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Άδειασμα δεδομένων του πίνακα `assignment_submit`
+--
+
+INSERT INTO `assignment_submit` (`id`, `uid`, `assignment_id`, `submission_date`, `submission_ip`, `file_path`, `file_name`, `submission_text`, `comments`, `grade`, `grade_rubric`, `grade_comments`, `grade_comments_filepath`, `grade_comments_filename`, `grade_submission_date`, `grade_submission_ip`, `group_id`, `auto_judge_scenarios_output`) VALUES
+(2, 4, 4, '2021-09-22 14:33:04', '::1', '614b11c867fd0/Cooper Betty (bet).txt', 'bet.txt', '', '', 10, '', '', '', '', '2021-09-22', '::1', 0, NULL),
+(3, 3, 4, '2021-09-22 14:35:42', '::1', '614b11c867fd0/Foystanos Manthos (manth).txt', 'manthos.txt', '', '', 1, '', '', '', '', '2021-09-22', '::1', 0, NULL),
+(4, 4, 5, '2021-09-22 14:38:21', '::1', '614b132a83c18/Cooper Betty (bet).txt', 'bet.txt', '', '', 10, '', '', '', '', '2021-09-22', '::1', 0, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Δομή πίνακα για τον πίνακα `assignment_to_specific`
+--
+
+CREATE TABLE `assignment_to_specific` (
+  `user_id` int(11) NOT NULL,
+  `group_id` int(11) NOT NULL,
+  `assignment_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Δομή πίνακα για τον πίνακα `attendance`
+--
+
+CREATE TABLE `attendance` (
+  `id` int(11) NOT NULL,
+  `course_id` int(11) NOT NULL,
+  `limit` tinyint(4) NOT NULL DEFAULT 0,
+  `students_semester` tinyint(4) NOT NULL DEFAULT 1,
+  `active` tinyint(1) NOT NULL DEFAULT 0,
+  `title` varchar(250) DEFAULT NULL,
+  `start_date` datetime NOT NULL,
+  `end_date` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Δομή πίνακα για τον πίνακα `attendance_activities`
+--
+
+CREATE TABLE `attendance_activities` (
+  `id` int(11) NOT NULL,
+  `attendance_id` mediumint(11) NOT NULL,
+  `title` varchar(250) DEFAULT NULL,
+  `date` datetime DEFAULT NULL,
+  `description` text NOT NULL,
+  `module_auto_id` mediumint(11) NOT NULL DEFAULT 0,
+  `module_auto_type` tinyint(4) NOT NULL DEFAULT 0,
+  `auto` tinyint(4) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Δομή πίνακα για τον πίνακα `attendance_book`
+--
+
+CREATE TABLE `attendance_book` (
+  `id` int(11) NOT NULL,
+  `attendance_activity_id` mediumint(11) NOT NULL,
+  `uid` int(11) NOT NULL DEFAULT 0,
+  `attend` tinyint(4) NOT NULL DEFAULT 0,
+  `comments` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Δομή πίνακα για τον πίνακα `attendance_users`
+--
+
+CREATE TABLE `attendance_users` (
+  `id` int(11) NOT NULL,
+  `attendance_id` int(11) NOT NULL,
+  `uid` int(11) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Δομή πίνακα για τον πίνακα `auth`
+--
+
+CREATE TABLE `auth` (
+  `auth_id` int(2) NOT NULL,
+  `auth_name` varchar(20) NOT NULL DEFAULT '',
+  `auth_settings` text DEFAULT NULL,
+  `auth_instructions` text DEFAULT NULL,
+  `auth_title` text DEFAULT NULL,
+  `auth_default` tinyint(1) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Άδειασμα δεδομένων του πίνακα `auth`
+--
+
+INSERT INTO `auth` (`auth_id`, `auth_name`, `auth_settings`, `auth_instructions`, `auth_title`, `auth_default`) VALUES
+(1, 'eclass', '', '', '', 1),
+(2, 'pop3', '', '', '', 0),
+(3, 'imap', '', '', '', 0),
+(4, 'ldap', '', '', '', 0),
+(5, 'db', '', '', '', 0),
+(6, 'shibboleth', '', '', '', 0),
+(7, 'cas', '', '', '', 0),
+(8, 'facebook', '', '', '', 0),
+(9, 'twitter', '', '', '', 0),
+(10, 'google', '', '', '', 0),
+(11, 'live', '', '', '', 0),
+(12, 'yahoo', '', '', '', 0),
+(13, 'linkedin', '', '', '', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Δομή πίνακα για τον πίνακα `autoenroll_course`
+--
+
+CREATE TABLE `autoenroll_course` (
+  `id` int(11) NOT NULL,
+  `rule` int(11) NOT NULL DEFAULT 0,
+  `course_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Δομή πίνακα για τον πίνακα `autoenroll_department`
+--
+
+CREATE TABLE `autoenroll_department` (
+  `id` int(11) NOT NULL,
+  `rule` int(11) NOT NULL DEFAULT 0,
+  `department_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Δομή πίνακα για τον πίνακα `autoenroll_rule`
+--
+
+CREATE TABLE `autoenroll_rule` (
+  `id` int(11) NOT NULL,
+  `status` tinyint(4) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Δομή πίνακα για τον πίνακα `autoenroll_rule_department`
+--
+
+CREATE TABLE `autoenroll_rule_department` (
+  `rule` int(11) NOT NULL,
+  `department` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Δομή πίνακα για τον πίνακα `badge`
+--
+
+CREATE TABLE `badge` (
+  `id` int(11) NOT NULL,
+  `course_id` int(11) NOT NULL,
+  `issuer` varchar(255) NOT NULL DEFAULT '',
+  `icon` mediumint(8) DEFAULT NULL,
+  `title` varchar(255) NOT NULL,
+  `description` text DEFAULT NULL,
+  `message` text DEFAULT NULL,
+  `autoassign` tinyint(1) NOT NULL DEFAULT 1,
+  `active` tinyint(1) NOT NULL DEFAULT 1,
+  `created` datetime DEFAULT NULL,
+  `expires` datetime DEFAULT NULL,
+  `bundle` int(11) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Δομή πίνακα για τον πίνακα `badge_criterion`
+--
+
+CREATE TABLE `badge_criterion` (
+  `id` int(11) NOT NULL,
+  `badge` int(11) NOT NULL,
+  `activity_type` varchar(255) DEFAULT NULL,
+  `module` int(11) DEFAULT NULL,
+  `resource` int(11) DEFAULT NULL,
+  `threshold` decimal(7,2) DEFAULT NULL,
+  `operator` varchar(20) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Δομή πίνακα για τον πίνακα `badge_icon`
+--
+
+CREATE TABLE `badge_icon` (
+  `id` mediumint(8) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `description` text DEFAULT NULL,
+  `filename` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Άδειασμα δεδομένων του πίνακα `badge_icon`
+--
+
+INSERT INTO `badge_icon` (`id`, `name`, `description`, `filename`) VALUES
+(1, 'attendance', '', 'attendance.png'),
+(2, 'badge', '', 'badge.png'),
+(3, 'idea', '', 'idea.png'),
+(4, 'likes', '', 'likes.png'),
+(5, 'on_target', '', 'on_target.png'),
+(6, 'posts', '', 'posts.png'),
+(7, 'sources', '', 'sources.png'),
+(8, 'task_degree', '', 'task_degree.png'),
+(9, 'total_grade', '', 'total_grade.png');
+
+-- --------------------------------------------------------
+
+--
+-- Δομή πίνακα για τον πίνακα `blog_post`
+--
+
+CREATE TABLE `blog_post` (
+  `id` int(11) UNSIGNED NOT NULL,
+  `title` varchar(255) NOT NULL DEFAULT '',
+  `content` text NOT NULL,
+  `time` datetime NOT NULL,
+  `views` int(11) UNSIGNED NOT NULL DEFAULT 0,
+  `commenting` tinyint(4) NOT NULL DEFAULT 1,
+  `user_id` int(11) UNSIGNED NOT NULL DEFAULT 0,
+  `course_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Δομή πίνακα για τον πίνακα `category`
+--
+
+CREATE TABLE `category` (
+  `id` int(11) NOT NULL,
+  `name` text NOT NULL,
+  `ordering` int(11) DEFAULT NULL,
+  `multiple` tinyint(1) NOT NULL DEFAULT 1,
+  `searchable` tinyint(1) NOT NULL DEFAULT 1,
+  `active` tinyint(1) NOT NULL DEFAULT 1
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Δομή πίνακα για τον πίνακα `category_value`
+--
+
+CREATE TABLE `category_value` (
+  `id` int(11) NOT NULL,
+  `category_id` int(11) NOT NULL,
+  `name` text NOT NULL,
+  `ordering` int(11) DEFAULT NULL,
+  `active` tinyint(1) NOT NULL DEFAULT 1
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Δομή πίνακα για τον πίνακα `certificate`
+--
+
+CREATE TABLE `certificate` (
+  `id` int(11) NOT NULL,
+  `course_id` int(11) NOT NULL,
+  `issuer` varchar(255) NOT NULL DEFAULT '',
+  `template` mediumint(8) DEFAULT NULL,
+  `title` varchar(255) NOT NULL,
+  `description` text DEFAULT NULL,
+  `message` text DEFAULT NULL,
+  `autoassign` tinyint(1) NOT NULL DEFAULT 1,
+  `active` tinyint(1) NOT NULL DEFAULT 1,
+  `created` datetime DEFAULT NULL,
+  `expires` datetime DEFAULT NULL,
+  `bundle` int(11) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Δομή πίνακα για τον πίνακα `certificate_criterion`
+--
+
+CREATE TABLE `certificate_criterion` (
+  `id` int(11) NOT NULL,
+  `certificate` int(11) NOT NULL,
+  `activity_type` varchar(255) DEFAULT NULL,
+  `module` int(11) DEFAULT NULL,
+  `resource` int(11) DEFAULT NULL,
+  `threshold` decimal(7,2) DEFAULT NULL,
+  `operator` varchar(20) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Δομή πίνακα για τον πίνακα `certificate_template`
+--
+
+CREATE TABLE `certificate_template` (
+  `id` mediumint(8) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `description` text DEFAULT NULL,
+  `filename` varchar(255) DEFAULT NULL,
+  `orientation` varchar(10) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Άδειασμα δεδομένων του πίνακα `certificate_template`
+--
+
+INSERT INTO `certificate_template` (`id`, `name`, `description`, `filename`, `orientation`) VALUES
+(1, 'Πρότυπο 1', '', 'certificate1.html', 'L'),
+(2, 'Πρότυπο 2', '', 'certificate2.html', 'L'),
+(3, 'Πρότυπο 3', '', 'certificate3.html', 'P'),
+(4, 'Πρότυπο 4', '', 'certificate4.html', 'L'),
+(5, 'Πρότυπο 5', '', 'certificate5.html', 'L');
+
+-- --------------------------------------------------------
+
+--
+-- Δομή πίνακα για τον πίνακα `certified_users`
+--
+
+CREATE TABLE `certified_users` (
+  `id` int(11) UNSIGNED NOT NULL,
+  `course_title` varchar(255) NOT NULL DEFAULT '',
+  `cert_title` varchar(255) NOT NULL DEFAULT '',
+  `cert_message` text DEFAULT NULL,
+  `cert_id` int(11) NOT NULL,
+  `cert_issuer` varchar(256) DEFAULT NULL,
+  `user_fullname` varchar(255) NOT NULL DEFAULT '',
+  `assigned` datetime NOT NULL,
+  `identifier` varchar(255) NOT NULL DEFAULT '',
+  `expires` datetime DEFAULT NULL,
+  `template_id` int(11) DEFAULT NULL,
+  `user_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Δομή πίνακα για τον πίνακα `colmooc_pair_log`
+--
+
+CREATE TABLE `colmooc_pair_log` (
+  `id` int(11) NOT NULL,
+  `activity_id` int(11) NOT NULL,
+  `moderator_id` int(11) NOT NULL,
+  `partner_id` int(11) NOT NULL,
+  `session_status` tinyint(4) NOT NULL DEFAULT 0,
+  `created` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Δομή πίνακα για τον πίνακα `colmooc_user`
+--
+
+CREATE TABLE `colmooc_user` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `colmooc_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Δομή πίνακα για τον πίνακα `colmooc_user_session`
+--
+
+CREATE TABLE `colmooc_user_session` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `activity_id` int(11) NOT NULL,
+  `session_id` text NOT NULL,
+  `session_token` text NOT NULL,
+  `session_status` tinyint(4) NOT NULL DEFAULT 0,
+  `session_status_updated` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Δομή πίνακα για τον πίνακα `comments`
+--
+
+CREATE TABLE `comments` (
+  `id` int(11) NOT NULL,
+  `rid` int(11) NOT NULL,
+  `rtype` varchar(50) NOT NULL,
+  `content` text NOT NULL,
+  `time` datetime NOT NULL,
+  `user_id` int(11) UNSIGNED NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Δομή πίνακα για τον πίνακα `conference`
+--
+
+CREATE TABLE `conference` (
+  `conf_id` int(11) NOT NULL,
+  `course_id` int(11) NOT NULL,
+  `conf_title` text NOT NULL,
+  `conf_description` text DEFAULT NULL,
+  `status` enum('active','inactive') DEFAULT 'active',
+  `start` timestamp NOT NULL DEFAULT current_timestamp(),
+  `user_id` varchar(255) DEFAULT '0',
+  `group_id` varchar(255) DEFAULT '0',
+  `chat_activity` tinyint(1) NOT NULL DEFAULT 0,
+  `agent_created` tinyint(1) NOT NULL DEFAULT 0,
+  `chat_activity_id` int(11) DEFAULT NULL,
+  `agent_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Δομή πίνακα για τον πίνακα `config`
+--
+
+CREATE TABLE `config` (
+  `key` varchar(32) NOT NULL,
+  `value` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Άδειασμα δεδομένων του πίνακα `config`
+--
+
+INSERT INTO `config` (`key`, `value`) VALUES
+('account_duration', '126144000'),
+('actions_expire_interval', '24'),
+('active_ui_languages', 'el en'),
+('admin_name', 'Διαχειριστής Πλατφόρμας'),
+('allow_teacher_clone_course', '0'),
+('alt_auth_prof_reg', '2'),
+('alt_auth_stud_reg', '2'),
+('am_required', '0'),
+('base_url', 'http://localhost/test/eclass/'),
+('block_username_change', '0'),
+('code_key', 'LgwBFSsgcFRvRjUyHQ03HFczbwZvajY6BQhuVgovAyY='),
+('course_guest', 'link'),
+('course_metadata', '0'),
+('course_multidep', '0'),
+('default_language', 'el'),
+('display_captcha', '0'),
+('doc_quota', '500'),
+('dont_display_login_form', '0'),
+('dont_mail_unverified_mails', '0'),
+('dropbox_allow_student_to_student', '0'),
+('dropbox_quota', '500'),
+('eclass_prof_reg', '0'),
+('eclass_release_info', '{\"release\":\"3.12.6\",\"release_timestamp\":\"2022-04-19T14:31:19+03:00\"}'),
+('eclass_release_timestamp', '1655753620'),
+('eclass_stud_reg', '0'),
+('email_announce', ''),
+('email_bounces', ''),
+('email_from', '0'),
+('email_helpdesk', ''),
+('email_required', '0'),
+('email_sender', 'fakegiannis1@gmail.com'),
+('email_transport', 'mail'),
+('email_verification_required', '0'),
+('enable_indexing', '1'),
+('enable_mobileapi', '1'),
+('enable_search', '1'),
+('enable_social_sharing_links', '1'),
+('eportfolio_enable', '1'),
+('fax', ''),
+('group_quota', '500'),
+('insert_xml_metadata', '0'),
+('institution', 'zola algorithm'),
+('institution_url', 'localhost/test/'),
+('language', 'el'),
+('login_fail_check', '1'),
+('login_fail_deny_interval', '5'),
+('login_fail_forgive_interval', '24'),
+('login_fail_threshold', '15'),
+('log_expire_interval', '5'),
+('log_purge_interval', '12'),
+('max_glossary_terms', '250'),
+('opencourses_enable', '0'),
+('personal_blog', '1'),
+('personal_blog_commenting', '1'),
+('personal_blog_rating', '1'),
+('personal_blog_sharing', '1'),
+('phone', '45345353'),
+('phpSysInfoURL', '../admin/sysinfo/'),
+('postaddress', ''),
+('restrict_owndep', '0'),
+('restrict_teacher_owndep', '0'),
+('site_name', 'Open eClass'),
+('student_upload_whitelist', 'pdf, ps, eps, tex, latex, dvi, texinfo, texi, zip, rar, tar, bz2, gz, 7z, xz, lha, lzh, z, Z, doc, docx, odt, ods, ott, sxw, stw, fodt, txt, rtf, dot, mcw, wps, xls, xlsx, xlt, ods, ots, sxc, stc, fods, uos, csv, ppt, pps, pot, pptx, ppsx, odp, otp, sxi, sti, fodp, uop, potm, odg, otg, sxd, std, fodg, odb, mdb, ttf, otf, jpg, jpeg, png, gif, bmp, tif, tiff, psd, dia, svg, ppm, xbm, xpm, ico, avi, asf, asx, wm, wmv, wma, dv, mov, moov, movie, mp4, mpg, mpeg, 3gp, 3g2, m2v, aac, m4a, flv, f4v, m4v, mp3, swf, webm, ogv, ogg, mid, midi, aif, rm, rpm, ram, wav, mp2, m3u, qt, vsd, vss, vst, pptx, ppsx, zipx, gsp, xml, a3p, ypr, mw2, dtd, aia, hex, mscz, pages, heic, piv, stk'),
+('teacher_upload_whitelist', 'htm, html, js, css, xml, xsl, xsd, dtd, cpp, c, java, m, h, tcl, py, sgml, sgm, ini, ds_store, dtd, xsd, woff2, ppsm, aia, hex, jqz, jm, data, jar, glo, jqz, jm, data, jar, mscz, epub, djvu, heic, piv, stk'),
+('theme', 'default'),
+('theme_options_id', '3'),
+('user_multidep', '0'),
+('user_registration', '1'),
+('version', '3.11.2'),
+('video_quota', '500');
+
+-- --------------------------------------------------------
+
+--
+-- Δομή πίνακα για τον πίνακα `course`
+--
+
+CREATE TABLE `course` (
+  `id` int(11) NOT NULL,
+  `code` varchar(20) NOT NULL,
+  `lang` varchar(16) NOT NULL DEFAULT 'el',
+  `title` varchar(250) NOT NULL DEFAULT '',
+  `keywords` text NOT NULL,
+  `course_license` tinyint(4) NOT NULL DEFAULT 0,
+  `visible` tinyint(4) NOT NULL,
+  `prof_names` varchar(200) NOT NULL DEFAULT '',
+  `public_code` varchar(20) NOT NULL DEFAULT '',
+  `created` datetime NOT NULL,
+  `doc_quota` float NOT NULL DEFAULT 104858000,
+  `video_quota` float NOT NULL DEFAULT 104858000,
+  `group_quota` float NOT NULL DEFAULT 104858000,
+  `dropbox_quota` float NOT NULL DEFAULT 104858000,
+  `password` varchar(50) NOT NULL DEFAULT '',
+  `glossary_expand` tinyint(1) NOT NULL DEFAULT 0,
+  `glossary_index` tinyint(1) NOT NULL DEFAULT 1,
+  `view_type` varchar(255) NOT NULL DEFAULT 'units',
+  `start_date` date DEFAULT NULL,
+  `finish_date` date DEFAULT NULL,
+  `description` mediumtext DEFAULT NULL,
+  `home_layout` tinyint(1) NOT NULL DEFAULT 1,
+  `course_image` varchar(400) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Άδειασμα δεδομένων του πίνακα `course`
+--
+
+INSERT INTO `course` (`id`, `code`, `lang`, `title`, `keywords`, `course_license`, `visible`, `prof_names`, `public_code`, `created`, `doc_quota`, `video_quota`, `group_quota`, `dropbox_quota`, `password`, `glossary_expand`, `glossary_index`, `view_type`, `start_date`, `finish_date`, `description`, `home_layout`, `course_image`) VALUES
+(1, 'TMA101', 'el', 'Python Θεορια', '', 0, 1, 'Παναγιτης γραματικακις', '1234', '2021-09-21 23:29:07', 524288000, 524288000, 524288000, 524288000, '', 0, 1, 'units', '2021-09-21', NULL, '', 1, NULL),
+(2, 'TMA102', 'el', 'Python εργαστιριο', '', 0, 1, 'Παναγιτης γραματικακις', '455', '2021-09-21 23:40:04', 524288000, 524288000, 524288000, 524288000, '', 0, 1, 'units', '2021-09-21', NULL, '', 1, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Δομή πίνακα για τον πίνακα `course_category`
+--
+
+CREATE TABLE `course_category` (
+  `id` int(11) NOT NULL,
+  `course_id` int(11) NOT NULL,
+  `category_value_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Δομή πίνακα για τον πίνακα `course_department`
+--
+
+CREATE TABLE `course_department` (
+  `id` int(11) NOT NULL,
+  `course` int(11) NOT NULL,
+  `department` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Άδειασμα δεδομένων του πίνακα `course_department`
+--
+
+INSERT INTO `course_department` (`id`, `course`, `department`) VALUES
+(1, 1, 2),
+(2, 2, 2);
+
+-- --------------------------------------------------------
+
+--
+-- Δομή πίνακα για τον πίνακα `course_description`
+--
+
+CREATE TABLE `course_description` (
+  `id` int(11) NOT NULL,
+  `course_id` int(11) NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `comments` mediumtext DEFAULT NULL,
+  `type` smallint(6) DEFAULT NULL,
+  `visible` tinyint(4) DEFAULT 0,
+  `order` int(11) NOT NULL,
+  `update_dt` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Δομή πίνακα για τον πίνακα `course_description_type`
+--
+
+CREATE TABLE `course_description_type` (
+  `id` smallint(6) NOT NULL,
+  `title` mediumtext DEFAULT NULL,
+  `syllabus` tinyint(1) DEFAULT 0,
+  `objectives` tinyint(1) DEFAULT 0,
+  `bibliography` tinyint(1) DEFAULT 0,
+  `teaching_method` tinyint(1) DEFAULT 0,
+  `assessment_method` tinyint(1) DEFAULT 0,
+  `prerequisites` tinyint(1) DEFAULT 0,
+  `featured_books` tinyint(1) DEFAULT 0,
+  `instructors` tinyint(1) DEFAULT 0,
+  `target_group` tinyint(1) DEFAULT 0,
+  `active` tinyint(1) DEFAULT 1,
+  `order` int(11) NOT NULL,
+  `icon` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Άδειασμα δεδομένων του πίνακα `course_description_type`
+--
+
+INSERT INTO `course_description_type` (`id`, `title`, `syllabus`, `objectives`, `bibliography`, `teaching_method`, `assessment_method`, `prerequisites`, `featured_books`, `instructors`, `target_group`, `active`, `order`, `icon`) VALUES
+(1, 'a:2:{s:2:\"el\";s:41:\"Περιεχόμενο μαθήματος\";s:2:\"en\";s:15:\"Course Syllabus\";}', 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, '0.png'),
+(2, 'a:2:{s:2:\"el\";s:33:\"Μαθησιακοί στόχοι\";s:2:\"en\";s:23:\"Course Objectives/Goals\";}', 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 2, '1.png'),
+(3, 'a:2:{s:2:\"el\";s:24:\"Βιβλιογραφία\";s:2:\"en\";s:12:\"Bibliography\";}', 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 3, '2.png'),
+(4, 'a:2:{s:2:\"el\";s:37:\"Μέθοδοι διδασκαλίας\";s:2:\"en\";s:21:\"Instructional Methods\";}', 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 4, '3.png'),
+(5, 'a:2:{s:2:\"el\";s:37:\"Μέθοδοι αξιολόγησης\";s:2:\"en\";s:18:\"Assessment Methods\";}', 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 5, '4.png'),
+(6, 'a:2:{s:2:\"el\";s:28:\"Προαπαιτούμενα\";s:2:\"en\";s:29:\"Prerequisites/Prior Knowledge\";}', 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 6, '5.png'),
+(7, 'a:2:{s:2:\"el\";s:22:\"Διδάσκοντες\";s:2:\"en\";s:11:\"Instructors\";}', 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 7, '6.png'),
+(8, 'a:2:{s:2:\"el\";s:23:\"Ομάδα στόχος\";s:2:\"en\";s:12:\"Target Group\";}', 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 8, '7.png'),
+(9, 'a:2:{s:2:\"el\";s:47:\"Προτεινόμενα συγγράμματα\";s:2:\"en\";s:9:\"Textbooks\";}', 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 9, '8.png'),
+(10, 'a:2:{s:2:\"el\";s:22:\"Περισσότερα\";s:2:\"en\";s:15:\"Additional info\";}', 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 11, 'default.png');
+
+-- --------------------------------------------------------
+
+--
+-- Δομή πίνακα για τον πίνακα `course_external_server`
+--
+
+CREATE TABLE `course_external_server` (
+  `id` int(11) NOT NULL,
+  `course_id` int(11) NOT NULL,
+  `external_server` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Δομή πίνακα για τον πίνακα `course_lti_app`
+--
+
+CREATE TABLE `course_lti_app` (
+  `id` int(11) NOT NULL,
+  `course_id` int(11) NOT NULL,
+  `lti_app` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Δομή πίνακα για τον πίνακα `course_module`
+--
+
+CREATE TABLE `course_module` (
+  `id` int(11) NOT NULL,
+  `module_id` int(11) NOT NULL,
+  `visible` tinyint(4) NOT NULL,
+  `course_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Άδειασμα δεδομένων του πίνακα `course_module`
+--
+
+INSERT INTO `course_module` (`id`, `module_id`, `visible`, `course_id`) VALUES
+(1, 4, 1, 1),
+(2, 5, 1, 1),
+(3, 9, 1, 1),
+(4, 10, 1, 1),
+(5, 15, 1, 1),
+(6, 17, 1, 1),
+(7, 18, 1, 1),
+(8, 19, 1, 1),
+(9, 21, 1, 1),
+(10, 23, 1, 1),
+(11, 26, 1, 1),
+(12, 37, 1, 1),
+(13, 46, 1, 1),
+(14, 32, 1, 1),
+(15, 30, 1, 1),
+(16, 34, 0, 1),
+(17, 48, 1, 1),
+(18, 47, 1, 1),
+(19, 1, 1, 1),
+(20, 2, 1, 1),
+(21, 3, 1, 1),
+(22, 7, 1, 1),
+(23, 20, 1, 1),
+(24, 16, 1, 1),
+(25, 4, 0, 2),
+(26, 5, 1, 2),
+(27, 9, 0, 2),
+(28, 10, 1, 2),
+(29, 15, 0, 2),
+(30, 17, 0, 2),
+(31, 18, 0, 2),
+(32, 19, 0, 2),
+(33, 21, 0, 2),
+(34, 23, 0, 2),
+(35, 26, 0, 2),
+(36, 37, 0, 2),
+(37, 46, 0, 2),
+(38, 32, 1, 2),
+(39, 30, 0, 2),
+(40, 34, 0, 2),
+(41, 48, 0, 2),
+(42, 47, 0, 2),
+(43, 1, 1, 2),
+(44, 2, 1, 2),
+(45, 3, 1, 2),
+(46, 7, 1, 2),
+(47, 20, 1, 2),
+(48, 16, 1, 2);
+
+-- --------------------------------------------------------
+
+--
+-- Δομή πίνακα για τον πίνακα `course_prerequisite`
+--
+
+CREATE TABLE `course_prerequisite` (
+  `id` int(11) UNSIGNED NOT NULL,
+  `course_id` int(11) NOT NULL,
+  `prerequisite_course` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Δομή πίνακα για τον πίνακα `course_review`
+--
+
+CREATE TABLE `course_review` (
+  `id` int(11) NOT NULL,
+  `course_id` int(11) NOT NULL,
+  `is_certified` tinyint(1) NOT NULL DEFAULT 0,
+  `level` tinyint(4) NOT NULL DEFAULT 0,
+  `last_review` datetime NOT NULL,
+  `last_reviewer` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Δομή πίνακα για τον πίνακα `course_settings`
+--
+
+CREATE TABLE `course_settings` (
+  `setting_id` int(11) NOT NULL,
+  `course_id` int(11) NOT NULL,
+  `value` int(11) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Δομή πίνακα για τον πίνακα `course_units`
+--
+
+CREATE TABLE `course_units` (
+  `id` int(11) NOT NULL,
+  `title` varchar(255) NOT NULL DEFAULT '',
+  `comments` mediumtext DEFAULT NULL,
+  `start_week` date DEFAULT NULL,
+  `finish_week` date DEFAULT NULL,
+  `visible` tinyint(4) DEFAULT NULL,
+  `public` tinyint(4) NOT NULL DEFAULT 1,
+  `order` int(11) NOT NULL DEFAULT 0,
+  `course_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Δομή πίνακα για τον πίνακα `course_user`
+--
+
+CREATE TABLE `course_user` (
+  `course_id` int(11) NOT NULL DEFAULT 0,
+  `user_id` int(11) UNSIGNED NOT NULL DEFAULT 0,
+  `status` tinyint(4) NOT NULL DEFAULT 0,
+  `tutor` int(11) NOT NULL DEFAULT 0,
+  `editor` int(11) NOT NULL DEFAULT 0,
+  `reviewer` int(11) NOT NULL DEFAULT 0,
+  `reg_date` datetime NOT NULL,
+  `receive_mail` tinyint(1) NOT NULL DEFAULT 1,
+  `document_timestamp` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Άδειασμα δεδομένων του πίνακα `course_user`
+--
+
+INSERT INTO `course_user` (`course_id`, `user_id`, `status`, `tutor`, `editor`, `reviewer`, `reg_date`, `receive_mail`, `document_timestamp`) VALUES
+(1, 2, 1, 1, 0, 0, '2021-09-21 23:29:07', 1, '2021-09-21 23:26:21'),
+(1, 3, 5, 0, 0, 0, '2021-09-22 14:35:20', 1, '2021-09-22 14:35:20'),
+(1, 4, 5, 0, 0, 0, '2021-09-21 23:47:58', 1, '2021-09-21 23:47:48'),
+(2, 2, 1, 1, 0, 0, '2021-09-21 23:40:04', 1, '2021-09-21 23:40:04'),
+(2, 3, 5, 0, 0, 0, '2021-09-22 14:35:19', 1, '2021-09-22 14:35:19'),
+(2, 4, 5, 0, 0, 0, '2021-09-21 23:47:57', 1, '2021-09-21 23:47:57');
+
+-- --------------------------------------------------------
+
+--
+-- Δομή πίνακα για τον πίνακα `course_user_request`
+--
+
+CREATE TABLE `course_user_request` (
+  `id` int(11) UNSIGNED NOT NULL,
+  `uid` int(11) NOT NULL,
+  `course_id` int(11) NOT NULL,
+  `comments` text DEFAULT NULL,
+  `status` int(11) NOT NULL,
+  `ts` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Δομή πίνακα για τον πίνακα `cron_params`
+--
+
+CREATE TABLE `cron_params` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `last_run` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Άδειασμα δεδομένων του πίνακα `cron_params`
+--
+
+INSERT INTO `cron_params` (`id`, `name`, `last_run`) VALUES
+(1, 'admin_monthly', '2022-06-20 22:33:41');
+
+-- --------------------------------------------------------
+
+--
+-- Δομή πίνακα για τον πίνακα `custom_profile_fields`
+--
+
+CREATE TABLE `custom_profile_fields` (
+  `id` int(11) NOT NULL,
+  `shortname` varchar(255) NOT NULL,
+  `name` mediumtext NOT NULL,
+  `description` mediumtext DEFAULT NULL,
+  `datatype` varchar(255) NOT NULL,
+  `categoryid` int(11) NOT NULL DEFAULT 0,
+  `sortorder` int(11) NOT NULL DEFAULT 0,
+  `required` tinyint(4) NOT NULL DEFAULT 0,
+  `visibility` tinyint(4) NOT NULL DEFAULT 0,
+  `user_type` tinyint(4) NOT NULL,
+  `registration` tinyint(4) NOT NULL DEFAULT 0,
+  `data` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Δομή πίνακα για τον πίνακα `custom_profile_fields_category`
+--
+
+CREATE TABLE `custom_profile_fields_category` (
+  `id` int(11) NOT NULL,
+  `name` mediumtext NOT NULL,
+  `sortorder` int(11) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Δομή πίνακα για τον πίνακα `custom_profile_fields_data`
+--
+
+CREATE TABLE `custom_profile_fields_data` (
+  `user_id` int(8) UNSIGNED NOT NULL DEFAULT 0,
+  `field_id` int(11) NOT NULL,
+  `data` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Δομή πίνακα για τον πίνακα `custom_profile_fields_data_pending`
+--
+
+CREATE TABLE `custom_profile_fields_data_pending` (
+  `user_request_id` int(11) NOT NULL DEFAULT 0,
+  `field_id` int(11) NOT NULL,
+  `data` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Δομή πίνακα για τον πίνακα `document`
+--
+
+CREATE TABLE `document` (
+  `id` int(11) NOT NULL,
+  `course_id` int(11) NOT NULL DEFAULT 0,
+  `subsystem` tinyint(4) NOT NULL,
+  `subsystem_id` int(11) DEFAULT NULL,
+  `path` varchar(255) NOT NULL,
+  `extra_path` varchar(255) NOT NULL DEFAULT '',
+  `filename` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `visible` tinyint(4) NOT NULL DEFAULT 1,
+  `public` tinyint(4) NOT NULL DEFAULT 1,
+  `comment` text DEFAULT NULL,
+  `category` tinyint(4) NOT NULL DEFAULT 0,
+  `title` text DEFAULT NULL,
+  `creator` text DEFAULT NULL,
+  `date` datetime NOT NULL,
+  `date_modified` datetime NOT NULL,
+  `subject` text DEFAULT NULL,
+  `description` text DEFAULT NULL,
+  `author` varchar(255) NOT NULL DEFAULT '',
+  `format` varchar(32) NOT NULL DEFAULT '',
+  `language` varchar(16) NOT NULL DEFAULT 'el',
+  `copyrighted` tinyint(4) NOT NULL DEFAULT 0,
+  `editable` tinyint(4) NOT NULL DEFAULT 0,
+  `lock_user_id` int(11) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Άδειασμα δεδομένων του πίνακα `document`
+--
+
+INSERT INTO `document` (`id`, `course_id`, `subsystem`, `subsystem_id`, `path`, `extra_path`, `filename`, `visible`, `public`, `comment`, `category`, `title`, `creator`, `date`, `date_modified`, `subject`, `description`, `author`, `format`, `language`, `copyrighted`, `editable`, `lock_user_id`) VALUES
+(1, 1, 0, 0, '/614a4194zih7.txt', '', 'ΚΕΦΑΛΑΙΟ 3.txt', 1, 1, '', 0, 'ΚΕΦΑΛΑΙΟ 3', 'Παναγιτης γραματικακις', '2021-09-21 23:33:24', '2021-09-21 23:33:24', '', '', '', 'txt', 'el', 0, 0, 2);
+
+-- --------------------------------------------------------
+
+--
+-- Δομή πίνακα για τον πίνακα `dropbox_attachment`
+--
+
+CREATE TABLE `dropbox_attachment` (
+  `id` int(11) UNSIGNED NOT NULL,
+  `msg_id` int(11) UNSIGNED NOT NULL,
+  `filename` varchar(250) NOT NULL,
+  `real_filename` varchar(255) NOT NULL,
+  `filesize` int(11) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Δομή πίνακα για τον πίνακα `dropbox_index`
+--
+
+CREATE TABLE `dropbox_index` (
+  `msg_id` int(11) UNSIGNED NOT NULL,
+  `recipient_id` int(11) UNSIGNED NOT NULL,
+  `is_read` tinyint(1) NOT NULL DEFAULT 0,
+  `deleted` tinyint(1) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Δομή πίνακα για τον πίνακα `dropbox_msg`
+--
+
+CREATE TABLE `dropbox_msg` (
+  `id` int(11) UNSIGNED NOT NULL,
+  `course_id` int(11) NOT NULL,
+  `author_id` int(11) UNSIGNED NOT NULL,
+  `subject` varchar(250) NOT NULL,
+  `body` longtext NOT NULL,
+  `timestamp` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Δομή πίνακα για τον πίνακα `ebook`
+--
+
+CREATE TABLE `ebook` (
+  `id` int(11) NOT NULL,
+  `course_id` int(11) NOT NULL,
+  `order` int(11) NOT NULL,
+  `title` text DEFAULT NULL,
+  `visible` tinyint(1) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Δομή πίνακα για τον πίνακα `ebook_section`
+--
+
+CREATE TABLE `ebook_section` (
+  `id` int(11) NOT NULL,
+  `ebook_id` int(11) NOT NULL,
+  `public_id` varchar(11) NOT NULL,
+  `file` varchar(128) DEFAULT NULL,
+  `title` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Δομή πίνακα για τον πίνακα `ebook_subsection`
+--
+
+CREATE TABLE `ebook_subsection` (
+  `id` int(11) NOT NULL,
+  `section_id` int(11) NOT NULL,
+  `public_id` varchar(11) NOT NULL,
+  `file_id` int(11) NOT NULL,
+  `title` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Δομή πίνακα για τον πίνακα `eportfolio_fields`
+--
+
+CREATE TABLE `eportfolio_fields` (
+  `id` int(11) NOT NULL,
+  `shortname` varchar(255) NOT NULL,
+  `name` mediumtext NOT NULL,
+  `description` mediumtext DEFAULT NULL,
+  `datatype` varchar(255) NOT NULL,
+  `categoryid` int(11) NOT NULL DEFAULT 0,
+  `sortorder` int(11) NOT NULL DEFAULT 0,
+  `required` tinyint(4) NOT NULL DEFAULT 0,
+  `data` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Άδειασμα δεδομένων του πίνακα `eportfolio_fields`
+--
+
+INSERT INTO `eportfolio_fields` (`id`, `shortname`, `name`, `description`, `datatype`, `categoryid`, `sortorder`, `required`, `data`) VALUES
+(1, 'birth_date', 'Ημερομηνία γέννησης', '', '3', 1, 0, 0, ''),
+(2, 'birth_place', 'Τόπος γέννησης', '', '1', 1, -1, 0, ''),
+(3, 'gender', 'Φύλο', '', '4', 1, -2, 0, 'a:2:{i:0;s:12:\"Άνδρας\";i:1;s:14:\"Γυναίκα\";}'),
+(4, 'about_me', 'Σχετικά με μένα', '<p>Λίγα λόγια για τον εαυτό σας</p>', '2', 1, -3, 0, ''),
+(5, 'personal_website', 'Προσωπική σελίδα', '', '5', 1, -4, 0, ''),
+(6, 'education', 'Εκπαίδευση', '<p>Σπουδές, ακαδημαϊκά προσόντα κ.λπ.</p>', '2', 2, 0, 0, ''),
+(7, 'employment', 'Επαγγελματική εμπειρία', '', '2', 2, -1, 0, ''),
+(8, 'certificates_awards', 'Πιστοποιήσεις και βραβεία', '', '2', 3, 0, 0, ''),
+(9, 'publications', 'Δημοσιεύσεις', '', '2', 3, -1, 0, ''),
+(10, 'personal_goals', 'Προσωπικοί στόχοι', '', '2', 4, 0, 0, ''),
+(11, 'academic_goals', 'Ακαδημαϊκοί στόχοι', '', '2', 4, -1, 0, ''),
+(12, 'career_goals', 'Επαγγελματικοί στόχοι', '', '2', 4, -2, 0, ''),
+(13, 'personal_skills', 'Προσωπικές δεξιότητες', '', '2', 4, -3, 0, ''),
+(14, 'academic_skills', 'Ακαδημαϊκές δεξιότητες', '', '2', 4, -4, 0, ''),
+(15, 'career_skills', 'Επαγγελματικές δεξιότητες', '', '2', 4, -5, 0, ''),
+(16, 'email', 'E-mail', '', '1', 5, 0, 0, ''),
+(17, 'phone_number', 'Τηλέφωνο', '', '1', 5, -1, 0, ''),
+(18, 'Address', 'Διεύθυνση', '', '1', 5, -2, 0, ''),
+(19, 'fb', 'Facebook προφίλ', '', '5', 5, -3, 0, ''),
+(20, 'twitter', 'Twitter λογαριασμός', '', '5', 5, -4, 0, ''),
+(21, 'linkedin', 'LinkedIn προφίλ', '', '5', 5, -5, 0, '');
+
+-- --------------------------------------------------------
+
+--
+-- Δομή πίνακα για τον πίνακα `eportfolio_fields_category`
+--
+
+CREATE TABLE `eportfolio_fields_category` (
+  `id` int(11) NOT NULL,
+  `name` mediumtext NOT NULL,
+  `sortorder` int(11) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Άδειασμα δεδομένων του πίνακα `eportfolio_fields_category`
+--
+
+INSERT INTO `eportfolio_fields_category` (`id`, `name`, `sortorder`) VALUES
+(1, 'Προσωπικά στοιχεία', 0),
+(2, 'Εκπαίδευση και εργασία', -1),
+(3, 'Διακρίσεις - επιτεύγματα', -2),
+(4, 'Στόχοι και δεξιότητες', -3),
+(5, 'Στοιχεία επικοινωνίας', -4);
+
+-- --------------------------------------------------------
+
+--
+-- Δομή πίνακα για τον πίνακα `eportfolio_fields_data`
+--
+
+CREATE TABLE `eportfolio_fields_data` (
+  `user_id` int(11) UNSIGNED NOT NULL DEFAULT 0,
+  `field_id` int(11) NOT NULL,
+  `data` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Δομή πίνακα για τον πίνακα `eportfolio_resource`
+--
+
+CREATE TABLE `eportfolio_resource` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) UNSIGNED NOT NULL DEFAULT 0,
+  `resource_id` int(11) NOT NULL,
+  `resource_type` varchar(50) NOT NULL,
+  `course_id` int(11) NOT NULL,
+  `course_title` varchar(250) NOT NULL DEFAULT '',
+  `time_added` timestamp NOT NULL DEFAULT current_timestamp(),
+  `data` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Δομή πίνακα για τον πίνακα `exercise`
+--
+
+CREATE TABLE `exercise` (
+  `id` int(11) NOT NULL,
+  `course_id` int(11) NOT NULL,
+  `title` varchar(250) DEFAULT NULL,
+  `description` text DEFAULT NULL,
+  `type` tinyint(4) UNSIGNED NOT NULL DEFAULT 1,
+  `range` tinyint(3) UNSIGNED DEFAULT 0,
+  `start_date` datetime DEFAULT NULL,
+  `end_date` datetime DEFAULT NULL,
+  `temp_save` tinyint(1) NOT NULL DEFAULT 0,
+  `time_constraint` int(11) DEFAULT 0,
+  `attempts_allowed` int(11) DEFAULT 0,
+  `random` smallint(6) NOT NULL DEFAULT 0,
+  `shuffle` smallint(6) NOT NULL DEFAULT 0,
+  `active` tinyint(4) DEFAULT NULL,
+  `public` tinyint(4) NOT NULL DEFAULT 1,
+  `results` tinyint(1) NOT NULL DEFAULT 1,
+  `score` tinyint(1) NOT NULL DEFAULT 1,
+  `assign_to_specific` tinyint(4) NOT NULL DEFAULT 0,
+  `ip_lock` text DEFAULT NULL,
+  `password_lock` varchar(255) DEFAULT NULL,
+  `continue_time_limit` int(11) NOT NULL DEFAULT 0,
+  `calc_grade_method` tinyint(4) DEFAULT 1
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Δομή πίνακα για τον πίνακα `exercise_answer`
+--
+
+CREATE TABLE `exercise_answer` (
+  `id` int(11) NOT NULL,
+  `question_id` int(11) NOT NULL DEFAULT 0,
+  `answer` text DEFAULT NULL,
+  `correct` int(11) DEFAULT NULL,
+  `comment` text DEFAULT NULL,
+  `weight` float(5,2) DEFAULT NULL,
+  `r_position` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Άδειασμα δεδομένων του πίνακα `exercise_answer`
+--
+
+INSERT INTO `exercise_answer` (`id`, `question_id`, `answer`, `correct`, `comment`, `weight`, `r_position`) VALUES
+(1, 1, '<p>εκτυπονη</p>', 1, '', 0.00, 1),
+(2, 1, '<p>φτιαχνι δυναρτησης</p>', 0, '', 0.00, 2);
+
+-- --------------------------------------------------------
+
+--
+-- Δομή πίνακα για τον πίνακα `exercise_answer_record`
+--
+
+CREATE TABLE `exercise_answer_record` (
+  `answer_record_id` int(11) NOT NULL,
+  `eurid` int(11) NOT NULL,
+  `question_id` int(11) NOT NULL,
+  `answer` text DEFAULT NULL,
+  `answer_id` int(11) NOT NULL,
+  `weight` float(11,2) DEFAULT NULL,
+  `is_answered` tinyint(4) NOT NULL DEFAULT 1,
+  `q_position` int(11) NOT NULL DEFAULT 1
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Δομή πίνακα για τον πίνακα `exercise_question`
+--
+
+CREATE TABLE `exercise_question` (
+  `id` int(11) NOT NULL,
+  `course_id` int(11) NOT NULL,
+  `question` text DEFAULT NULL,
+  `description` text DEFAULT NULL,
+  `weight` float(11,2) DEFAULT NULL,
+  `type` int(11) DEFAULT 1,
+  `difficulty` int(1) DEFAULT 0,
+  `category` int(11) DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Άδειασμα δεδομένων του πίνακα `exercise_question`
+--
+
+INSERT INTO `exercise_question` (`id`, `course_id`, `question`, `description`, `weight`, `type`, `difficulty`, `category`) VALUES
+(1, 2, 'τι ειναι η εντολη πριντ', '', 0.00, 1, 0, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Δομή πίνακα για τον πίνακα `exercise_question_cats`
+--
+
+CREATE TABLE `exercise_question_cats` (
+  `question_cat_id` int(11) NOT NULL,
+  `question_cat_name` varchar(300) NOT NULL,
+  `course_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Δομή πίνακα για τον πίνακα `exercise_to_specific`
+--
+
+CREATE TABLE `exercise_to_specific` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `group_id` int(11) DEFAULT NULL,
+  `exercise_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Δομή πίνακα για τον πίνακα `exercise_user_record`
+--
+
+CREATE TABLE `exercise_user_record` (
+  `eurid` int(11) NOT NULL,
+  `eid` int(11) NOT NULL DEFAULT 0,
+  `uid` int(11) UNSIGNED NOT NULL DEFAULT 0,
+  `record_start_date` datetime NOT NULL,
+  `record_end_date` datetime DEFAULT NULL,
+  `total_score` float(11,2) NOT NULL DEFAULT 0.00,
+  `total_weighting` float(11,2) DEFAULT 0.00,
+  `attempt` int(11) NOT NULL DEFAULT 0,
+  `attempt_status` tinyint(4) NOT NULL DEFAULT 1,
+  `secs_remaining` int(11) NOT NULL DEFAULT 0,
+  `assigned_to` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Άδειασμα δεδομένων του πίνακα `exercise_user_record`
+--
+
+INSERT INTO `exercise_user_record` (`eurid`, `eid`, `uid`, `record_start_date`, `record_end_date`, `total_score`, `total_weighting`, `attempt`, `attempt_status`, `secs_remaining`, `assigned_to`) VALUES
+(1, 1, 2, '2021-09-21 23:42:31', '2021-09-21 23:42:43', 0.00, 0.00, 1, 4, 0, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Δομή πίνακα για τον πίνακα `exercise_with_questions`
+--
+
+CREATE TABLE `exercise_with_questions` (
+  `id` int(11) NOT NULL,
+  `question_id` int(11) DEFAULT 0,
+  `exercise_id` int(11) NOT NULL DEFAULT 0,
+  `q_position` int(11) NOT NULL DEFAULT 1,
+  `random_criteria` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Δομή πίνακα για τον πίνακα `ext_plag_connection`
+--
+
+CREATE TABLE `ext_plag_connection` (
+  `id` int(11) UNSIGNED NOT NULL,
+  `type` int(1) UNSIGNED NOT NULL DEFAULT 1,
+  `file_id` int(11) NOT NULL,
+  `remote_file_id` int(11) DEFAULT NULL,
+  `submission_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Δομή πίνακα για τον πίνακα `faq`
+--
+
+CREATE TABLE `faq` (
+  `id` int(11) NOT NULL,
+  `title` text NOT NULL,
+  `body` text NOT NULL,
+  `order` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Δομή πίνακα για τον πίνακα `forum`
+--
+
+CREATE TABLE `forum` (
+  `id` int(10) NOT NULL,
+  `name` varchar(150) NOT NULL DEFAULT '',
+  `desc` mediumtext NOT NULL,
+  `num_topics` int(10) NOT NULL DEFAULT 0,
+  `num_posts` int(10) NOT NULL DEFAULT 0,
+  `last_post_id` int(10) NOT NULL DEFAULT 0,
+  `cat_id` int(10) NOT NULL DEFAULT 0,
+  `course_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Δομή πίνακα για τον πίνακα `forum_category`
+--
+
+CREATE TABLE `forum_category` (
+  `id` int(10) NOT NULL,
+  `cat_title` varchar(100) NOT NULL DEFAULT '',
+  `cat_order` int(11) NOT NULL DEFAULT 0,
+  `course_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Άδειασμα δεδομένων του πίνακα `forum_category`
+--
+
+INSERT INTO `forum_category` (`id`, `cat_title`, `cat_order`, `course_id`) VALUES
+(1, 'Γενικές Περιοχές Συζητήσεων', 0, 1),
+(2, 'Γενικές Περιοχές Συζητήσεων', 0, 2);
+
+-- --------------------------------------------------------
+
+--
+-- Δομή πίνακα για τον πίνακα `forum_notify`
+--
+
+CREATE TABLE `forum_notify` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL DEFAULT 0,
+  `cat_id` int(11) NOT NULL DEFAULT 0,
+  `forum_id` int(11) NOT NULL DEFAULT 0,
+  `topic_id` int(11) NOT NULL DEFAULT 0,
+  `notify_sent` tinyint(1) NOT NULL DEFAULT 0,
+  `course_id` int(11) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Δομή πίνακα για τον πίνακα `forum_post`
+--
+
+CREATE TABLE `forum_post` (
+  `id` int(10) NOT NULL,
+  `topic_id` int(10) NOT NULL DEFAULT 0,
+  `post_text` mediumtext NOT NULL,
+  `poster_id` int(10) NOT NULL DEFAULT 0,
+  `post_time` datetime DEFAULT NULL,
+  `poster_ip` varchar(45) NOT NULL DEFAULT '',
+  `parent_post_id` int(10) NOT NULL DEFAULT 0,
+  `topic_filepath` varchar(200) DEFAULT NULL,
+  `topic_filename` varchar(200) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Δομή πίνακα για τον πίνακα `forum_topic`
+--
+
+CREATE TABLE `forum_topic` (
+  `id` int(10) NOT NULL,
+  `title` varchar(100) DEFAULT NULL,
+  `poster_id` int(10) DEFAULT NULL,
+  `topic_time` datetime DEFAULT NULL,
+  `num_views` int(10) NOT NULL DEFAULT 0,
+  `num_replies` int(10) NOT NULL DEFAULT 0,
+  `last_post_id` int(10) NOT NULL DEFAULT 0,
+  `forum_id` int(10) NOT NULL DEFAULT 0,
+  `locked` tinyint(4) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Δομή πίνακα για τον πίνακα `forum_user_stats`
+--
+
+CREATE TABLE `forum_user_stats` (
+  `user_id` int(11) NOT NULL,
+  `num_posts` int(11) NOT NULL,
+  `course_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Δομή πίνακα για τον πίνακα `glossary`
+--
+
+CREATE TABLE `glossary` (
+  `id` int(11) NOT NULL,
+  `term` varchar(255) NOT NULL,
+  `definition` text NOT NULL,
+  `url` text DEFAULT NULL,
+  `order` int(11) NOT NULL DEFAULT 0,
+  `datestamp` datetime NOT NULL,
+  `course_id` int(11) NOT NULL,
+  `category_id` int(11) DEFAULT NULL,
+  `notes` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Δομή πίνακα για τον πίνακα `glossary_category`
+--
+
+CREATE TABLE `glossary_category` (
+  `id` int(11) NOT NULL,
+  `course_id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `description` text NOT NULL,
+  `order` int(11) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Δομή πίνακα για τον πίνακα `gradebook`
+--
+
+CREATE TABLE `gradebook` (
+  `id` int(11) NOT NULL,
+  `course_id` int(11) NOT NULL,
+  `students_semester` tinyint(4) NOT NULL DEFAULT 1,
+  `range` tinyint(4) NOT NULL DEFAULT 10,
+  `active` tinyint(1) NOT NULL DEFAULT 0,
+  `title` varchar(250) DEFAULT NULL,
+  `start_date` datetime NOT NULL,
+  `end_date` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Δομή πίνακα για τον πίνακα `gradebook_activities`
+--
+
+CREATE TABLE `gradebook_activities` (
+  `id` mediumint(11) NOT NULL,
+  `gradebook_id` mediumint(11) NOT NULL,
+  `title` varchar(250) DEFAULT NULL,
+  `activity_type` int(11) DEFAULT NULL,
+  `date` datetime DEFAULT NULL,
+  `description` text NOT NULL,
+  `weight` decimal(5,2) NOT NULL DEFAULT 0.00,
+  `module_auto_id` mediumint(11) NOT NULL DEFAULT 0,
+  `module_auto_type` tinyint(4) NOT NULL DEFAULT 0,
+  `auto` tinyint(4) NOT NULL DEFAULT 0,
+  `visible` tinyint(4) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Δομή πίνακα για τον πίνακα `gradebook_book`
+--
+
+CREATE TABLE `gradebook_book` (
+  `id` int(11) NOT NULL,
+  `gradebook_activity_id` mediumint(11) NOT NULL,
+  `uid` int(11) NOT NULL DEFAULT 0,
+  `grade` float NOT NULL DEFAULT -1,
+  `comments` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Δομή πίνακα για τον πίνακα `gradebook_users`
+--
+
+CREATE TABLE `gradebook_users` (
+  `id` mediumint(11) NOT NULL,
+  `gradebook_id` mediumint(11) NOT NULL,
+  `uid` int(11) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Δομή πίνακα για τον πίνακα `grading_scale`
+--
+
+CREATE TABLE `grading_scale` (
+  `id` int(11) NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `scales` text NOT NULL,
+  `course_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Δομή πίνακα για τον πίνακα `group`
+--
+
+CREATE TABLE `group` (
+  `id` int(11) NOT NULL,
+  `course_id` int(11) NOT NULL DEFAULT 0,
+  `name` varchar(100) NOT NULL DEFAULT '',
+  `description` text DEFAULT NULL,
+  `forum_id` int(11) DEFAULT NULL,
+  `category_id` int(11) DEFAULT NULL,
+  `max_members` int(11) NOT NULL DEFAULT 0,
+  `secret_directory` varchar(30) NOT NULL DEFAULT '0',
+  `visible` tinyint(4) NOT NULL DEFAULT 1
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Δομή πίνακα για τον πίνακα `group_category`
+--
+
+CREATE TABLE `group_category` (
+  `id` int(6) NOT NULL,
+  `course_id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `description` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Δομή πίνακα για τον πίνακα `group_members`
+--
+
+CREATE TABLE `group_members` (
+  `group_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `is_tutor` int(11) NOT NULL DEFAULT 0,
+  `description` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Δομή πίνακα για τον πίνακα `group_properties`
+--
+
+CREATE TABLE `group_properties` (
+  `course_id` int(11) NOT NULL,
+  `group_id` int(11) NOT NULL,
+  `self_registration` tinyint(4) NOT NULL DEFAULT 1,
+  `allow_unregister` tinyint(4) NOT NULL DEFAULT 0,
+  `forum` tinyint(4) NOT NULL DEFAULT 1,
+  `private_forum` tinyint(4) NOT NULL DEFAULT 0,
+  `documents` tinyint(4) NOT NULL DEFAULT 1,
+  `wiki` tinyint(4) NOT NULL DEFAULT 0,
+  `agenda` tinyint(4) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Δομή πίνακα για τον πίνακα `h5p_content`
+--
+
+CREATE TABLE `h5p_content` (
+  `id` int(10) NOT NULL,
+  `main_library_id` int(10) NOT NULL,
+  `params` text DEFAULT NULL,
+  `course_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Δομή πίνακα για τον πίνακα `h5p_content_dependency`
+--
+
+CREATE TABLE `h5p_content_dependency` (
+  `id` int(10) NOT NULL,
+  `content_id` int(10) NOT NULL,
+  `library_id` int(10) NOT NULL,
+  `dependency_type` varchar(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Δομή πίνακα για τον πίνακα `h5p_library`
+--
+
+CREATE TABLE `h5p_library` (
+  `id` int(10) NOT NULL,
+  `machine_name` varchar(255) NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `major_version` int(4) NOT NULL,
+  `minor_version` int(4) NOT NULL,
+  `patch_version` int(4) NOT NULL,
+  `runnable` int(1) NOT NULL DEFAULT 0,
+  `fullscreen` int(1) NOT NULL DEFAULT 0,
+  `embed_types` varchar(255) DEFAULT NULL,
+  `preloaded_js` text DEFAULT NULL,
+  `preloaded_css` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Δομή πίνακα για τον πίνακα `h5p_library_dependency`
+--
+
+CREATE TABLE `h5p_library_dependency` (
+  `id` int(10) NOT NULL,
+  `library_id` int(10) NOT NULL,
+  `required_library_id` int(10) NOT NULL,
+  `dependency_type` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Δομή πίνακα για τον πίνακα `h5p_library_translation`
+--
+
+CREATE TABLE `h5p_library_translation` (
+  `id` int(10) NOT NULL,
+  `library_id` int(10) NOT NULL,
+  `language_code` varchar(255) NOT NULL,
+  `language_json` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Δομή πίνακα για τον πίνακα `hierarchy`
+--
+
+CREATE TABLE `hierarchy` (
+  `id` int(11) NOT NULL,
+  `code` varchar(20) DEFAULT NULL,
+  `name` text NOT NULL,
+  `description` text NOT NULL,
+  `number` int(11) NOT NULL DEFAULT 1000,
+  `generator` int(11) NOT NULL DEFAULT 100,
+  `lft` int(11) NOT NULL,
+  `rgt` int(11) NOT NULL,
+  `allow_course` tinyint(1) NOT NULL DEFAULT 0,
+  `allow_user` tinyint(1) NOT NULL DEFAULT 0,
+  `order_priority` int(11) DEFAULT NULL,
+  `visible` tinyint(4) NOT NULL DEFAULT 2
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Άδειασμα δεδομένων του πίνακα `hierarchy`
+--
+
+INSERT INTO `hierarchy` (`id`, `code`, `name`, `description`, `number`, `generator`, `lft`, `rgt`, `allow_course`, `allow_user`, `order_priority`, `visible`) VALUES
+(1, '', 'zola algorithm', '', 1000, 100, 1, 48, 0, 0, NULL, 2),
+(2, 'TMA', 'a:1:{s:2:\"el\";s:10:\"1 Ταξη\";}', 'a:0:{}', 10, 102, 2, 3, 1, 1, 0, 2);
+
+-- --------------------------------------------------------
+
+--
+-- Δομή πίνακα για τον πίνακα `idx_queue`
+--
+
+CREATE TABLE `idx_queue` (
+  `id` int(11) NOT NULL,
+  `course_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Δομή πίνακα για τον πίνακα `idx_queue_async`
+--
+
+CREATE TABLE `idx_queue_async` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `request_type` varchar(255) NOT NULL,
+  `resource_type` varchar(255) NOT NULL,
+  `resource_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Δομή πίνακα για τον πίνακα `link`
+--
+
+CREATE TABLE `link` (
+  `id` int(11) NOT NULL,
+  `course_id` int(11) NOT NULL,
+  `url` text NOT NULL,
+  `title` text NOT NULL,
+  `description` text NOT NULL,
+  `category` int(6) NOT NULL DEFAULT 0,
+  `order` int(6) NOT NULL DEFAULT 0,
+  `user_id` int(11) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Δομή πίνακα για τον πίνακα `link_category`
+--
+
+CREATE TABLE `link_category` (
+  `id` int(6) NOT NULL,
+  `course_id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `description` text DEFAULT NULL,
+  `order` int(6) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Δομή πίνακα για τον πίνακα `log`
+--
+
+CREATE TABLE `log` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL DEFAULT 0,
+  `course_id` int(11) NOT NULL DEFAULT 0,
+  `module_id` int(11) NOT NULL DEFAULT 0,
+  `details` text NOT NULL,
+  `action_type` int(11) NOT NULL DEFAULT 0,
+  `ts` datetime NOT NULL,
+  `ip` varchar(45) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Δομή πίνακα για τον πίνακα `loginout`
+--
+
+CREATE TABLE `loginout` (
+  `idLog` int(11) NOT NULL,
+  `id_user` int(11) NOT NULL DEFAULT 0,
+  `ip` char(45) NOT NULL DEFAULT '0.0.0.0',
+  `when` datetime NOT NULL,
+  `action` enum('LOGIN','LOGOUT') NOT NULL DEFAULT 'LOGIN'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Άδειασμα δεδομένων του πίνακα `loginout`
+--
+
+INSERT INTO `loginout` (`idLog`, `id_user`, `ip`, `when`, `action`) VALUES
+(1, 1, '::1', '2021-09-20 23:53:02', 'LOGIN'),
+(2, 1, '::1', '2021-09-20 23:54:55', 'LOGIN'),
+(3, 1, '::1', '2021-09-21 23:18:09', 'LOGIN'),
+(4, 1, '::1', '2021-09-21 23:25:21', 'LOGOUT'),
+(5, 2, '::1', '2021-09-21 23:26:21', 'LOGIN'),
+(6, 2, '::1', '2021-09-21 23:44:17', 'LOGOUT'),
+(7, 1, '::1', '2021-09-21 23:44:28', 'LOGIN'),
+(8, 1, '::1', '2021-09-21 23:47:42', 'LOGOUT'),
+(9, 4, '::1', '2021-09-21 23:47:48', 'LOGIN'),
+(10, 4, '::1', '2021-09-21 23:49:53', 'LOGOUT'),
+(11, 1, '::1', '2021-09-21 23:50:01', 'LOGIN'),
+(12, 1, '::1', '2021-09-21 23:54:12', 'LOGOUT'),
+(13, 4, '::1', '2021-09-21 23:54:20', 'LOGIN'),
+(14, 4, '::1', '2021-09-22 14:17:54', 'LOGOUT'),
+(15, 2, '::1', '2021-09-22 14:18:35', 'LOGIN'),
+(16, 2, '::1', '2021-09-22 14:27:45', 'LOGOUT'),
+(17, 4, '::1', '2021-09-22 14:28:26', 'LOGIN'),
+(18, 4, '::1', '2021-09-22 14:30:30', 'LOGOUT'),
+(19, 2, '::1', '2021-09-22 14:30:37', 'LOGIN'),
+(20, 2, '::1', '2021-09-22 14:31:45', 'LOGOUT'),
+(21, 4, '::1', '2021-09-22 14:32:07', 'LOGIN'),
+(22, 4, '::1', '2021-09-22 14:33:17', 'LOGOUT'),
+(23, 3, '::1', '2021-09-22 14:35:12', 'LOGIN'),
+(24, 3, '::1', '2021-09-22 14:35:52', 'LOGOUT'),
+(25, 2, '::1', '2021-09-22 14:36:07', 'LOGIN'),
+(26, 2, '::1', '2021-09-22 14:37:54', 'LOGOUT'),
+(27, 4, '::1', '2021-09-22 14:38:01', 'LOGIN'),
+(28, 4, '::1', '2021-09-22 14:38:24', 'LOGOUT'),
+(29, 2, '::1', '2021-09-22 14:38:34', 'LOGIN'),
+(30, 2, '::1', '2021-09-22 14:39:06', 'LOGOUT'),
+(31, 1, '127.0.0.1', '2021-10-11 17:52:15', 'LOGIN'),
+(32, 1, '127.0.0.1', '2022-06-20 22:32:44', 'LOGIN'),
+(33, 1, '127.0.0.1', '2022-06-20 22:37:12', 'LOGOUT'),
+(34, 5, '127.0.0.1', '2022-06-20 22:37:30', 'LOGIN'),
+(35, 5, '127.0.0.1', '2022-06-20 22:38:03', 'LOGOUT');
+
+-- --------------------------------------------------------
+
+--
+-- Δομή πίνακα για τον πίνακα `loginout_summary`
+--
+
+CREATE TABLE `loginout_summary` (
+  `id` int(11) NOT NULL,
+  `login_sum` int(11) UNSIGNED NOT NULL DEFAULT 0,
+  `start_date` datetime NOT NULL,
+  `end_date` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Δομή πίνακα για τον πίνακα `logins`
+--
+
+CREATE TABLE `logins` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `ip` char(45) NOT NULL DEFAULT '0.0.0.0',
+  `date_time` datetime NOT NULL,
+  `course_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Άδειασμα δεδομένων του πίνακα `logins`
+--
+
+INSERT INTO `logins` (`id`, `user_id`, `ip`, `date_time`, `course_id`) VALUES
+(1, 2, '::1', '2021-09-21 23:29:17', 1),
+(2, 2, '::1', '2021-09-21 23:40:42', 2),
+(3, 4, '::1', '2021-09-21 23:48:03', 1),
+(4, 4, '::1', '2021-09-21 23:48:43', 2),
+(5, 4, '::1', '2021-09-21 23:49:08', 1),
+(6, 1, '::1', '2021-09-21 23:50:08', 1),
+(7, 1, '::1', '2021-09-21 23:51:00', 2),
+(8, 1, '::1', '2021-09-21 23:52:06', 1),
+(9, 1, '::1', '2021-09-21 23:52:58', 2),
+(10, 1, '::1', '2021-09-21 23:53:08', 2),
+(11, 1, '::1', '2021-09-21 23:53:22', 1),
+(12, 1, '::1', '2021-09-21 23:53:33', 1)
